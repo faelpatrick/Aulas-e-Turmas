@@ -1,0 +1,21 @@
+Lista Ordenada de Estilos de Texto
+
+Esse é um texto em negrito
+Esse é um texto em itálico
+Esse é um texto sublinhado
+Esse é um texto marcado
+Esse é um texto excluído
+Esse é um texto inserido
+Esse é um texto subscrito
+Esse é um texto sobrescrito
+
+Lista Não Ordenada de Estilos de Texto
+
+Esse é um texto em negrito
+Esse é um texto em itálico
+Esse é um texto sublinhado
+Esse é um texto marcado
+Esse é um texto excluído
+Esse é um texto inserido
+Esse é um texto subscrito
+Esse é um texto sobrescrito
