@@ -1,4 +1,3 @@
-
 from tkinter import *
 from tkinter import messagebox
 
@@ -71,11 +70,11 @@ lb_title.place(width=700, height=50, x=0, y=0)
 
 # Entrada de texto para adicionar tarefas
 entrada_tarefa = Entry(tela1, width=40, font="Arial 14")
-entrada_tarefa.place(x=50, y=70, width=500, height=40)
+entrada_tarefa.place(x=50, y=70, width=400, height=40)
 
 # Botão para adicionar tarefa
 btn_adicionar = Button(tela1, text="Adicionar Tarefa", font="Arial 12 bold", bg=azul, fg=branco, command=adicionar_tarefa)
-btn_adicionar.place(x=560, y=70, width=130, height=40)
+btn_adicionar.place(x=480, y=70, width=180, height=40)
 
 # Frame para lista de tarefas
 frame_tarefas = Frame(tela1, bg=branco)
