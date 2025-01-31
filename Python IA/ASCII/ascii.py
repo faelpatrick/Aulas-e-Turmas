@@ -6,7 +6,7 @@ import pywhatkit  # Biblioteca para conversão de imagem em ASCII
 
 # Definição de cores
 branco = '#ffffff'
-azul = '#364a85'
+azul = '#8f88ba'
 
 # -------------------------------------------------------------
 
