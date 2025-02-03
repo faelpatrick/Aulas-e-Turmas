@@ -5,29 +5,34 @@ import importlib
 import os
 
 # Definição de cores
-branco = '#ffffff'
-azul = '#8f88ba'
+branco = "#ffffff"
+azul = "#8f88ba"
 
 # Variáveis globais
 imagem_original = None
 imagem_editada = None
 plugins = {}
 
+
 # 📂 Abrir imagem
 def abrir_imagem():
-    caminho = filedialog.askopenfilename(filetypes=[("Imagens", "*.png;*.jpg;*.jpeg;*.bmp;*.gif")])
+    caminho = filedialog.askopenfilename(
+        filetypes=[("Imagens", "*.png;*.jpg;*.jpeg;*.bmp;*.gif")]
+    )
     if caminho:
         global imagem_original, imagem_editada
         imagem_original = Image.open(caminho)
         imagem_editada = imagem_original.copy()
         exibir_imagem(imagem_editada)
 
+
 # 🖼️ Exibir imagem no canvas
 def exibir_imagem(img):
-    img.thumbnail((400, 400))  # Redimensiona para caber na tela
+    img.thumbnail((800, 800))  # Redimensiona para caber na tela
     img_tk = ImageTk.PhotoImage(img)
     canvas.img_tk = img_tk
     canvas.create_image(200, 200, anchor=tk.CENTER, image=img_tk)
+
 
 # 🔄 Restaurar imagem original
 def restaurar_original():
@@ -36,13 +41,17 @@ def restaurar_original():
         imagem_editada = imagem_original.copy()
         exibir_imagem(imagem_editada)
 
+
 # 💾 Salvar imagem editada
 def salvar_imagem():
     if imagem_editada:
-        caminho = filedialog.asksaveasfilename(defaultextension=".png",
-                                               filetypes=[("PNG", "*.png"), ("JPEG", "*.jpg"), ("BMP", "*.bmp")])
+        caminho = filedialog.asksaveasfilename(
+            defaultextension=".png",
+            filetypes=[("PNG", "*.png"), ("JPEG", "*.jpg"), ("BMP", "*.bmp")],
+        )
         if caminho:
             imagem_editada.save(caminho)
+
 
 # 🧩 Carregar plugins automaticamente
 def carregar_plugins():
@@ -63,13 +72,18 @@ def carregar_plugins():
             nome_modulo = f"plugins.{arquivo[:-3]}"
             try:
                 modulo = importlib.import_module(nome_modulo)
-                importlib.reload(modulo)  # Recarregar módulo caso já tenha sido carregado
+                importlib.reload(
+                    modulo
+                )  # Recarregar módulo caso já tenha sido carregado
                 if hasattr(modulo, "aplicar"):
-                    nome_plugin = getattr(modulo, "PLUGIN_NOME", arquivo[:-3].capitalize())
+                    nome_plugin = getattr(
+                        modulo, "PLUGIN_NOME", arquivo[:-3].capitalize()
+                    )
                     icone_plugin = getattr(modulo, "PLUGIN_ICONE", "🎨")
                     plugins[nome_plugin] = (modulo, icone_plugin)
             except Exception as e:
                 print(f"Erro ao carregar plugin {arquivo}: {e}")
+
 
 # 🎨 Criar botões dos plugins
 def atualizar_lista_plugins():
@@ -77,17 +91,31 @@ def atualizar_lista_plugins():
         widget.destroy()
 
     # Criar separador
-    separador = tk.Label(frame_plugins, text="--- Plugins ---", bg="lightgray", font=("Arial", 10, "bold"))
+    separador = tk.Label(
+        frame_plugins,
+        text=" Plugins ",
+        bg="lightgray",
+        width=18,
+        font=("Arial", 10, "bold"),
+    )
     separador.pack(pady=5)
 
     # Criar botões para cada plugin
     for nome_plugin, (modulo, icone) in plugins.items():
-        btn_efeito = tk.Button(frame_plugins, text=f"{icone} {nome_plugin}", command=lambda m=modulo: aplicar_efeito(m), width=18)
+        btn_efeito = tk.Button(
+            frame_plugins,
+            text=f"{icone} {nome_plugin}",
+            command=lambda m=modulo: aplicar_efeito(m),
+            width=18,
+        )
         btn_efeito.pack(pady=2)
 
     # Adicionar botão "Refresh Plugins" no final
-    btn_refresh = tk.Button(frame_plugins, text="🔄 Refresh Plugins", command=atualizar_plugins, width=18)
+    btn_refresh = tk.Button(
+        frame_plugins, text="🔄 Refresh Plugins", command=atualizar_plugins, width=18
+    )
     btn_refresh.pack(pady=5)
+
 
 # 🔄 Aplicar efeito de um plugin
 def aplicar_efeito(modulo):
@@ -96,10 +124,12 @@ def aplicar_efeito(modulo):
         imagem_editada = modulo.aplicar(imagem_original.copy())
         exibir_imagem(imagem_editada)
 
+
 # 🔄 Recarregar plugins e atualizar interface
 def atualizar_plugins():
     carregar_plugins()
     atualizar_lista_plugins()
+
 
 # 🎨 Criar interface gráfica
 root = tk.Tk()
@@ -111,14 +141,18 @@ frame_botoes = tk.Frame(root, padx=10, pady=10, bg="lightgray")
 frame_botoes.pack(side=tk.LEFT, fill=tk.Y)
 
 # 🖼️ Criar canvas para exibir imagem
-canvas = tk.Canvas(root, width=400, height=400, bg="gray")
+canvas = tk.Canvas(root, width=800, height=800, bg="gray")
 canvas.pack(side=tk.RIGHT, expand=True)
 
 # 🔘 Criar botões principais (topo)
-btn_abrir = tk.Button(frame_botoes, text="📂 Abrir Imagem", command=abrir_imagem, width=18)
+btn_abrir = tk.Button(
+    frame_botoes, text="📂 Abrir Imagem", command=abrir_imagem, width=18
+)
 btn_abrir.pack(pady=5)
 
-btn_restaurar = tk.Button(frame_botoes, text="🔄 Restaurar", command=restaurar_original, width=18)
+btn_restaurar = tk.Button(
+    frame_botoes, text="🔄 Restaurar", command=restaurar_original, width=18
+)
 btn_restaurar.pack(pady=5)
 
 btn_salvar = tk.Button(frame_botoes, text="💾 Salvar", command=salvar_imagem, width=18)
