@@ -1,0 +1,37 @@
+{
+  "perguntas": [
+    {
+      "pergunta": "Qual a capital de Portugal?",
+      "respostas": {
+        "resposta1": "Braga",
+        "resposta2": "Porto",
+        "resposta3": "Lisboa",
+        "resposta4": "Aveiro",
+        "correta": "Lisboa"
+      },
+      "img": "default.png"
+    },
+    {
+      "pergunta": "Qual a capital da França?",
+      "respostas": {
+        "resposta1": "Paris",
+        "resposta2": "Londres",
+        "resposta3": "Berlim",
+        "resposta4": "Madrid",
+        "correta": "Paris"
+      },
+      "img": "default.png"
+    },
+    {
+      "pergunta": "Qual a capital do Brasil?",
+      "respostas": {
+        "resposta1": "São Paulo",
+        "resposta2": "Rio de Janeiro",
+        "resposta3": "Brasilia",
+        "resposta4": "Minas Gerais",
+        "correta": "Brasilia"
+      },
+      "img": "default.png"
+    }
+  ]
+}
